@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { authSelectors, authOperations } from 'redux/auth';
+import authSelectors from 'redux/auth/auth-selectors';
+import authOperations from 'redux/auth/auth-operations';
 
 const styles = {
   container: {

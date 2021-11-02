@@ -1,5 +1,8 @@
 import { useState } from 'react';
-import { useCreateContactMutation, useFetchContactsQuery } from 'redux/contactsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from '../../redux/contacts/contacts-selectors';
+import * as contactsOperations from '../../redux/contacts/contacts-operations';
+// import { useCreateContactMutation, useFetchContactsQuery } from 'redux/contactsSlice';
 import toast from 'react-hot-toast';
 // import Loader from 'components/Loader/Loader';
 import { Form, Input, Button } from './СontactForm.styled';
@@ -7,9 +10,12 @@ import { Form, Input, Button } from './СontactForm.styled';
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
 
-  const [createContact, { isLoading }] = useCreateContactMutation();
-  const { data: contacts } = useFetchContactsQuery();
+  const onSubmit = (name, number) => dispatch(contactsOperations.createContact({ name, number }));
+  // const [createContact, { isLoading }] = useCreateContactMutation();
+  // const { data: contacts } = useFetchContactsQuery();
 
   const handleContact = e => {
     const { name, value } = e.currentTarget;
@@ -36,7 +42,7 @@ const ContactForm = () => {
       setNumber('');
       return;
     }
-    createContact({ name, number });
+    onSubmit(name, number);
     toast(`${name} is added to contacts`);
     setName('');
     setNumber('');
@@ -72,9 +78,7 @@ const ContactForm = () => {
       </label>
       <div>
         {/* {isLoading && <Loader />} */}
-        <Button type="submit" disabled={isLoading}>
-          Add contact
-        </Button>
+        <Button type="submit">Add contact</Button>
       </div>
     </Form>
   );

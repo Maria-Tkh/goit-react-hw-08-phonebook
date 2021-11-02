@@ -51,7 +51,7 @@ export default function LoginView() {
           <input type="password" name="password" value={password} onChange={handleChange} />
         </label>
 
-        <button type="submit">Log on</button>
+        <button type="submit">Log in</button>
       </form>
     </div>
   );
