@@ -7,6 +7,9 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
   },
+  avatar: {
+    marginRight: 4,
+  },
   name: {
     fontWeight: 700,
     marginRight: 12,
@@ -16,11 +19,12 @@ const styles = {
 export default function UserMenu() {
   const dispatch = useDispatch();
   const name = useSelector(authSelectors.getUsername);
+  const avatar = 'https://www.svgrepo.com/show/280085/man-avatar.svg';
 
   return (
     <div style={styles.container}>
-      {/* <span style={styles.email}>{email}</span> */}
-      <span style={styles.name}>Welcome, {name}</span>
+      <img src={avatar} alt="" width="32" style={styles.avatar} />
+      <span style={styles.name}>Welcome, {name}, </span>
       <button type="button" onClick={() => dispatch(authOperations.logOut())}>
         Exit
       </button>
