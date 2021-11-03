@@ -1,5 +1,7 @@
 // import { useFetchContactsQuery, useDeleteContactMutation } from 'redux/contactsSlice';
-// import { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchContacts } from 'redux/contacts/contacts-operations';
 import { Toaster } from 'react-hot-toast';
 import ContactForm from 'components/СontactForm/СontactForm';
 import ContactList from 'components/СontactList/СontactList';
@@ -8,21 +10,8 @@ import Filter from 'components/Filter/Filter';
 import { PhonebookTitle, ContactTitle } from './ContactsView.styled';
 
 const ContactsView = () => {
-  // const { data: contacts, isFetching } = useFetchContactsQuery();
-  // const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
-
-  // toast('contact is deleted')
-
-  // const [filter, setFilter] = useState('');
-  // const changeFilter = e => {
-  //   setFilter(e.target.value);
-  // };
-
-  // const getVisibleContacts = () => {
-  //   const normalizedFilter = filter.toLowerCase();
-  //   return contacts.filter(contact => contact.name.toLowerCase().includes(normalizedFilter));
-  // };
-
+  const dispatch = useDispatch();
+  useEffect(() => dispatch(fetchContacts()), [dispatch]);
   return (
     <div>
       <PhonebookTitle>Phonebook</PhonebookTitle>
