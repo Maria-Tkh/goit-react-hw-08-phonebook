@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import toast, { Toaster } from 'react-hot-toast';
 import authOperations from '../redux/auth/auth-operations';
 
 const styles = {
@@ -35,6 +36,7 @@ export default function RegisterView() {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(authOperations.register({ name, email, password }));
+    toast(`${name}, you are successfully registered `);
     setName('');
     setEmail('');
     setPassword('');
@@ -62,6 +64,7 @@ export default function RegisterView() {
 
         <button type="submit">Register</button>
       </form>
+      <Toaster position="top-right" />
     </div>
   );
 }

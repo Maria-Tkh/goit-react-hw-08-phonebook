@@ -41,24 +41,3 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
-
-// eslint-disable-next-line import/no-anonymous-default-export
-// export default { store, persistor };
-
-// const authPersistConfig = {
-//   key: 'auth',
-//   storage,
-//   whitelist: ['token'],
-// };
-
-// export const store = configureStore({
-//   reducer: {
-//     [contactsApi.reducerPath]: contactsApi.reducer,
-//     auth: persistReducer(authPersistConfig, authReducer),
-//   },
-//   middleware: getDefaultMiddleware => [...getDefaultMiddleware(), contactsApi.middleware, logger],
-//   devTools: process.env.NODE_ENV === 'development',
-// });
-
-// setupListeners(store.dispatch);
-// export const persistor = persistStore(store);

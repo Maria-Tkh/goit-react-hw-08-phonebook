@@ -3,13 +3,17 @@ import ContactElement from 'components/СontactElement/СontactElement';
 import { useSelector, useDispatch } from 'react-redux';
 import * as contactsOperations from '../../redux/contacts/contacts-operations';
 import { getVisibleContacts } from '../../redux/contacts/contacts-selectors';
+import toast from 'react-hot-toast';
 import { List } from './СontactList.styled';
 
 const ContactList = () => {
   const contacts = useSelector(getVisibleContacts);
   const dispatch = useDispatch();
 
-  const onDeleteContact = id => dispatch(contactsOperations.deleteContact(id));
+  const onDeleteContact = id => {
+    dispatch(contactsOperations.deleteContact(id));
+    toast('contact is deleted');
+  };
 
   return (
     <List>
