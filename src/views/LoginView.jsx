@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import authOperations from '../redux/auth/auth-operations';
+import { Toaster } from 'react-hot-toast';
 
 const styles = {
   form: {
@@ -53,6 +54,7 @@ export default function LoginView() {
 
         <button type="submit">Log in</button>
       </form>
+      <Toaster position="top-left" />
     </div>
   );
 }

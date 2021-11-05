@@ -50,7 +50,8 @@
     "eslint": "^7.32.0",
     "husky": "^7.0.4",
     "lint-staged": "^11.2.6",
-    "prettier": "^2.4.1"
+    "prettier": "^2.4.1",
+    "remote-redux-devtools": "^0.5.16"
   },
   "lint-staged": {
     "*.{jsx,js}": "eslint --cache --fix",

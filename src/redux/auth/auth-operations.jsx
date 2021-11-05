@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import toast from 'react-hot-toast';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -18,6 +19,7 @@ const register = createAsyncThunk('auth/register', async (credentials, { rejectW
     token.set(data.token);
     return data;
   } catch (error) {
+    toast('registration failed');
     return rejectWithValue(error.data);
   }
 });
@@ -28,6 +30,7 @@ const logIn = createAsyncThunk('auth/login', async (credentials, { rejectWithVal
     token.set(data.token);
     return data;
   } catch (error) {
+    toast('login failed');
     return rejectWithValue(error.data);
   }
 });
@@ -41,21 +44,29 @@ const logOut = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) =>
   }
 });
 
-const fetchCurrentUser = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
-  const state = thunkAPI.getState();
-  const persistedToken = state.auth.token;
-  // console.log(persistedToken);
-  if (persistedToken === null) {
-    console.log('no token');
-    return thunkAPI.rejectWithValue();
-  }
-  token.set(persistedToken);
-  try {
-    const data = await axios.get('/users/current');
-    console.log(data);
-    return data;
-  } catch (error) {}
-});
+const fetchCurrentUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI, { rejectWithValue }) => {
+    const state = thunkAPI.getState();
+    // console.log(thunkAPI.getState());
+    const persistedToken = state.auth.token;
+    console.log(persistedToken);
+    if (persistedToken === null) {
+      console.log('no token');
+      return thunkAPI.rejectWithValue();
+      // return state;
+    }
+    token.set(persistedToken);
+    try {
+      const { data } = await axios.get('/users/current');
+      console.log(data);
+      return data;
+    } catch (error) {
+      // console.log(error);
+      return rejectWithValue(error.data);
+    }
+  },
+);
 
 const authOperations = {
   register,

@@ -29,15 +29,15 @@ const authSlice = createSlice({
     },
 
     [authOperations.fetchCurrentUser.pending](state) {
-      state.isfetchingCurrentUser = true;
+      state.isFetchingCurrentUser = true;
     },
     [authOperations.fetchCurrentUser.fulfilled](state, action) {
       state.user = action.payload;
       state.isLoggedIn = true;
-      state.isfetchingCurrentUser = false;
+      state.isFetchingCurrentUser = false;
     },
     [authOperations.fetchCurrentUser.rejected](state) {
-      state.isfetchingCurrentUser = false;
+      state.isFetchingCurrentUser = false;
     },
   },
 });
